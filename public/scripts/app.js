@@ -27,23 +27,34 @@ var boxForRender = document.querySelector('#app');
 // render display jsx to the user screen, that method takes two arguments, first is jsx 
 // that is what we want to render and second is where we want to render.
 
+
+var show = {
+    title: 'Pirrates of the carribean',
+    subtitle: 'march 23',
+    options: [1, 2]
+};
+
+var add = function add(a, b) {
+    return a + b;
+};
+
 var templateTwo = React.createElement(
     'div',
     null,
-    React.createElement(
+    show.title && React.createElement(
         'h1',
         null,
-        'Pawe\u0142 Polit'
+        show.title
     ),
     React.createElement(
         'p',
         null,
-        'Age:26'
+        show.subtitle
     ),
     React.createElement(
         'p',
         null,
-        'Location: Lublin'
+        show.options.length > 0 ? 'there are options' : ' no options'
     )
 );
 

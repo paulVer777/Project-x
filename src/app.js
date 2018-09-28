@@ -25,12 +25,23 @@ var boxForRender = document.querySelector('#app')
 // render display jsx to the user screen, that method takes two arguments, first is jsx 
 // that is what we want to render and second is where we want to render.
 
+
+const show = {
+    title:'Pirrates of the carribean',
+    subtitle:'march 23',
+    options:[1,2]
+}
+
+const add = (a, b) => a + b
+
 var templateTwo=(
     <div>
-        <h1>Paweł Polit</h1>
-        <p>Age:26</p>
-        <p>Location: Lublin</p>
+        {show.title && <h1>{show.title}</h1>}
+        <p>{show.subtitle}</p>
+        <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
+        
     </div>
 )
 
 ReactDOM.render(templateTwo,boxForRender)
+
