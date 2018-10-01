@@ -27,55 +27,52 @@ const boxForRender = document.querySelector('#app')
 
 
 const show = {
-    title:'Pirrates of the carribean',
-    subtitle:'march 23',
-    options:[1,2]
+    title:'Indecision App',
+    subtitle:'Take it easy',
+    options:[]
 }
 
 
+const onSubmitHandler = (e) =>{
 
-// const templateTwo=(
-//     <div>
-//          {show.title && <h1>{show.title}</h1>}
-//         <p>{show.subtitle}</p>
-//         <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
-        
-//     </div>
-// )
+e.preventDefault()
 
-let count=0;
+const text=e.target.elements.option.value
 
-
-const add = () => {
-
-    count++
-    render()
-
+if(text){
+     show.options.push(text)
+     render()
+     e.target.elements.option.value=''
 }
-const sub = () => {
-
-    count--
-    render()
-}
-const reset = () => {
-    count=0
-    render()
 }
 
-const render = () => {
+const removeAll = () => {
 
-const templateTwo = <div>
-
-<h1>Count {count}</h1>
-<button onClick={add}>+1</button>
-<button onClick={sub}>-1</button>
-<button onClick={reset}>reset</button>
-
-</div>
-
-ReactDOM.render(templateTwo,boxForRender)
-
-}
-
+show.options=[]
 render()
 
+}
+
+const render = () =>{
+    const templateTwo=(
+    <div>
+         {show.title && <h1>{show.title}</h1>}
+        <p>{show.subtitle}</p>
+        <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
+        <p>{ show.options.length}</p>
+    
+          <button onClick={removeAll}>Remove</button>
+
+        <form onSubmit={onSubmitHandler}>
+         <input type='text' name='option'></input>
+         <button>Add option</button>
+        </form>
+
+    </div>
+)
+
+ReactDOM.render(templateTwo,boxForRender)
+}
+
+
+render()
