@@ -1,32 +1,6 @@
 'use strict';
 
-console.log('app.js is running');
-
-// JSX - JavaScript XML
-
-// var jssX =
-// (
-//      <div>
-//      < h1 > Indecision App</h1>
-//      <p>This is some information</p>
-//      <ol>1</ol>
-//      <ol>2</ol>
-//      </div>
-// )
-
-
-// var jssX = React.createElement(
-//     "h1",
-//     null,
-//     " This is jsx"
-//   );
-
 var boxForRender = document.querySelector('#app');
-
-// ReactDOM.render(jssX,boxForRender) 
-// render display jsx to the user screen, that method takes two arguments, first is jsx 
-// that is what we want to render and second is where we want to render.
-
 
 var show = {
     title: 'Indecision App',
@@ -83,6 +57,19 @@ var render = function render() {
             'Remove'
         ),
         React.createElement(
+            'ol',
+            null,
+            show.options.map(function (value, index) {
+                return React.createElement(
+                    'li',
+                    { key: value },
+                    ' option : ',
+                    value,
+                    ' '
+                );
+            })
+        ),
+        React.createElement(
             'form',
             { onSubmit: onSubmitHandler },
             React.createElement('input', { type: 'text', name: 'option' }),
@@ -96,5 +83,15 @@ var render = function render() {
 
     ReactDOM.render(templateTwo, boxForRender);
 };
+
+console.log(show.options.map(function (value, index) {
+    return React.createElement(
+        'li',
+        { key: value },
+        ' option : ',
+        value,
+        ' '
+    );
+}));
 
 render();

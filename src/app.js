@@ -1,29 +1,7 @@
-console.log('app.js is running')
-
-// JSX - JavaScript XML
-
-// var jssX =
-// (
-//      <div>
-//      < h1 > Indecision App</h1>
-//      <p>This is some information</p>
-//      <ol>1</ol>
-//      <ol>2</ol>
-//      </div>
-// )
 
 
-// var jssX = React.createElement(
-//     "h1",
-//     null,
-//     " This is jsx"
-//   );
 
 const boxForRender = document.querySelector('#app')
-
-// ReactDOM.render(jssX,boxForRender) 
-// render display jsx to the user screen, that method takes two arguments, first is jsx 
-// that is what we want to render and second is where we want to render.
 
 
 const show = {
@@ -63,7 +41,13 @@ const render = () =>{
     
           <button onClick={removeAll}>Remove</button>
 
-        <form onSubmit={onSubmitHandler}>
+           <ol>
+            {
+              show.options.map((value,index) => <li key={value}> option : {value} </li>)
+            }
+            </ol>
+
+         <form onSubmit={onSubmitHandler}>
          <input type='text' name='option'></input>
          <button>Add option</button>
         </form>
@@ -74,5 +58,7 @@ const render = () =>{
 ReactDOM.render(templateTwo,boxForRender)
 }
 
+
+console.log(show.options.map((value,index) => <li key={value}> option : {value} </li>))
 
 render()
