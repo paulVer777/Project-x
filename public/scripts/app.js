@@ -32,30 +32,62 @@ var show = {
     title: 'Pirrates of the carribean',
     subtitle: 'march 23',
     options: [1, 2]
+
+    // const templateTwo=(
+    //     <div>
+    //          {show.title && <h1>{show.title}</h1>}
+    //         <p>{show.subtitle}</p>
+    //         <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
+
+    //     </div>
+    // )
+
+};var count = 0;
+
+var add = function add() {
+
+    count++;
+    render();
+};
+var sub = function sub() {
+
+    count--;
+    render();
+};
+var reset = function reset() {
+    count = 0;
+    render();
 };
 
-var add = function add(a, b) {
-    return a + b;
+var render = function render() {
+
+    var templateTwo = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Count ',
+            count
+        ),
+        React.createElement(
+            'button',
+            { onClick: add },
+            '+1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: sub },
+            '-1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset },
+            'reset'
+        )
+    );
+
+    ReactDOM.render(templateTwo, boxForRender);
 };
 
-var templateTwo = React.createElement(
-    'div',
-    null,
-    show.title && React.createElement(
-        'h1',
-        null,
-        show.title
-    ),
-    React.createElement(
-        'p',
-        null,
-        show.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        show.options.length > 0 ? 'there are options' : ' no options'
-    )
-);
-
-ReactDOM.render(templateTwo, boxForRender);
+render();

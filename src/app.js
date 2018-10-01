@@ -19,7 +19,7 @@ console.log('app.js is running')
 //     " This is jsx"
 //   );
 
-var boxForRender = document.querySelector('#app')
+const boxForRender = document.querySelector('#app')
 
 // ReactDOM.render(jssX,boxForRender) 
 // render display jsx to the user screen, that method takes two arguments, first is jsx 
@@ -32,16 +32,50 @@ const show = {
     options:[1,2]
 }
 
-const add = (a, b) => a + b
 
-var templateTwo=(
-    <div>
-        {show.title && <h1>{show.title}</h1>}
-        <p>{show.subtitle}</p>
-        <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
+
+// const templateTwo=(
+//     <div>
+//          {show.title && <h1>{show.title}</h1>}
+//         <p>{show.subtitle}</p>
+//         <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
         
-    </div>
-)
+//     </div>
+// )
+
+let count=0;
+
+
+const add = () => {
+
+    count++
+    render()
+
+}
+const sub = () => {
+
+    count--
+    render()
+}
+const reset = () => {
+    count=0
+    render()
+}
+
+const render = () => {
+
+const templateTwo = <div>
+
+<h1>Count {count}</h1>
+<button onClick={add}>+1</button>
+<button onClick={sub}>-1</button>
+<button onClick={reset}>reset</button>
+
+</div>
 
 ReactDOM.render(templateTwo,boxForRender)
+
+}
+
+render()
 
