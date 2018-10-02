@@ -30,7 +30,7 @@ var render = function render() {
         React.createElement(
             'p',
             null,
-            !appState.hidden ? appState.message : ''
+            !appState.hidden && appState.message
         )
     );
 

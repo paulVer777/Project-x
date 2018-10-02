@@ -18,7 +18,7 @@ const render = () => {
         <div>
           <h1>Visibility Toggle</h1>
            <button onClick={toggle}>{ appState.hidden ? 'Show details' : 'hide details'}</button>
-           <p>{!appState.hidden ? appState.message : ''}</p>
+           <p>{!appState.hidden && appState.message}</p>
         </div>
      
      )
@@ -26,5 +26,6 @@ const render = () => {
      ReactDOM.render(application,app)
 
 }
+
 
 render()
