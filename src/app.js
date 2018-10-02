@@ -68,3 +68,4 @@ ReactDOM.render(templateTwo,boxForRender)
 console.log(show.options.map((value,index) => <li key={value}> option : {value} </li>))
 
 render()
+

@@ -25,3 +25,18 @@ const multiplier = {
  
  
  console.log(multiplier.doIt(2,10,100))
+
+
+
+ ////// Currying ///////
+
+
+
+ const add = (a) =>{
+
+    return (b)=> a+b 
+
+}
+
+
+console.log(add(5)(5)) 
