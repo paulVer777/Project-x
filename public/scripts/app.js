@@ -1,103 +1,40 @@
 'use strict';
 
-var boxForRender = document.querySelector('#app');
+var appState = {
 
-var show = {
-    title: 'Indecision App',
-    subtitle: 'Take it easy',
-    options: []
+    hidden: true,
+    message: 'this is message for You'
 };
 
-var onSubmitHandler = function onSubmitHandler(e) {
+var toggle = function toggle() {
 
-    e.preventDefault();
-
-    var text = e.target.elements.option.value;
-
-    if (text) {
-        show.options.push(text);
-        render();
-        e.target.elements.option.value = '';
-    }
-};
-
-var removeAll = function removeAll() {
-
-    show.options = [];
+    appState.hidden = !appState.hidden;
     render();
 };
 
-var generateRandom = function generateRandom() {
-
-    var randomNum = Math.floor(Math.random() * show.options.length);
-    alert(show.options[randomNum]);
-};
-
 var render = function render() {
-    var templateTwo = React.createElement(
+
+    var application = React.createElement(
         'div',
         null,
-        show.title && React.createElement(
+        React.createElement(
             'h1',
             null,
-            show.title
+            'Visibility Toggle'
+        ),
+        React.createElement(
+            'button',
+            { onClick: toggle },
+            appState.hidden ? 'Show details' : 'hide details'
         ),
         React.createElement(
             'p',
             null,
-            show.subtitle
-        ),
-        React.createElement(
-            'p',
-            null,
-            show.options.length > 0 ? 'there are options' : ' no options'
-        ),
-        React.createElement(
-            'button',
-            { disabled: show.options.length === 0, onClick: generateRandom },
-            'What should I do?'
-        ),
-        React.createElement(
-            'button',
-            { onClick: removeAll },
-            'Remove'
-        ),
-        React.createElement(
-            'ol',
-            null,
-            show.options.map(function (value, index) {
-                return React.createElement(
-                    'li',
-                    { key: value },
-                    ' option : ',
-                    value,
-                    ' '
-                );
-            })
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onSubmitHandler },
-            React.createElement('input', { type: 'text', name: 'option' }),
-            React.createElement(
-                'button',
-                null,
-                'Add option'
-            )
+            !appState.hidden ? appState.message : ''
         )
     );
 
-    ReactDOM.render(templateTwo, boxForRender);
+    ReactDOM.render(application, app);
 };
-
-console.log(show.options.map(function (value, index) {
-    return React.createElement(
-        'li',
-        { key: value },
-        ' option : ',
-        value,
-        ' '
-    );
-}));
 
 render();
