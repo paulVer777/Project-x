@@ -1,71 +1,62 @@
+class Header extends React.Component {
 
+    render() {
 
-
-const boxForRender = document.querySelector('#app')
-
-
-const show = {
-    title:'Indecision App',
-    subtitle:'Take it easy',
-    options:[]
+        return (
+            <div>
+                <h1>Indecision</h1>
+                <h2>Helpful App</h2>
+            </div>
+        )
+    }
 }
 
+class Action extends React.Component {
 
-const onSubmitHandler = (e) =>{
+    render() {
 
-e.preventDefault()
-
-const text=e.target.elements.option.value
-
-if(text){
-     show.options.push(text)
-     render()
-     e.target.elements.option.value=''
-}
+        return (
+            <div>
+                <button>What should i do?</button>
+            </div>
+        )
+    }
 }
 
-const removeAll = () => {
+class Options extends React.Component {
 
-show.options=[]
-render()
+    render() {
+
+        return <div>
+            <p>options</p>
+        </div>
+
+    }
 
 }
 
+class Suboption extends React.Component {
 
-const generateRandom = () => {
-
-  const randomNum = Math.floor(Math.random() *show.options.length)
-  alert(show.options[randomNum])
+    render() {
+        return (
+            <form>
+                <input type='text' name='option'/>
+                <button>Add option</button>
+            </form>
+        )
+    }
 }
 
-const render = () =>{
-    const templateTwo=(
+const jsx = (
+
     <div>
-         {show.title && <h1>{show.title}</h1>}
-        <p>{show.subtitle}</p>
-        <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
-        <button disabled={show.options.length === 0} onClick={generateRandom}>What should I do?</button>
-    
-          <button onClick={removeAll}>Remove</button>
-
-           <ol>
-            {
-              show.options.map((value,index) => <li key={value}> option : {value} </li>)
-            }
-            </ol>
-
-         <form onSubmit={onSubmitHandler}>
-         <input type='text' name='option'></input>
-         <button>Add option</button>
-        </form>
-
+        <Header/>
+        <Action/>
+        <Options/>
+        <Suboption/>
     </div>
 )
 
-ReactDOM.render(templateTwo,boxForRender)
-}
+console.log(jsx)
 
-console.log(show.options.map((value,index) => <li key={value}> option : {value} </li>))
-
-render()
-
+ReactDOM.render(jsx, document.querySelector('#app'))
