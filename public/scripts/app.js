@@ -27,6 +27,12 @@ var removeAll = function removeAll() {
     render();
 };
 
+var generateRandom = function generateRandom() {
+
+    var randomNum = Math.floor(Math.random() * show.options.length);
+    alert(show.options[randomNum]);
+};
+
 var render = function render() {
     var templateTwo = React.createElement(
         'div',
@@ -47,9 +53,9 @@ var render = function render() {
             show.options.length > 0 ? 'there are options' : ' no options'
         ),
         React.createElement(
-            'p',
-            null,
-            show.options.length
+            'button',
+            { disabled: show.options.length === 0, onClick: generateRandom },
+            'What should I do?'
         ),
         React.createElement(
             'button',

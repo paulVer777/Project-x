@@ -31,13 +31,20 @@ render()
 
 }
 
+
+const generateRandom = () => {
+
+  const randomNum = Math.floor(Math.random() *show.options.length)
+  alert(show.options[randomNum])
+}
+
 const render = () =>{
     const templateTwo=(
     <div>
          {show.title && <h1>{show.title}</h1>}
         <p>{show.subtitle}</p>
         <p>{ show.options.length > 0 ? 'there are options' : ' no options'}</p>
-        <p>{ show.options.length}</p>
+        <button disabled={show.options.length === 0} onClick={generateRandom}>What should I do?</button>
     
           <button onClick={removeAll}>Remove</button>
 
@@ -57,7 +64,6 @@ const render = () =>{
 
 ReactDOM.render(templateTwo,boxForRender)
 }
-
 
 console.log(show.options.map((value,index) => <li key={value}> option : {value} </li>))
 
