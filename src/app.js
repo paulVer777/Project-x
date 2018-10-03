@@ -3,11 +3,13 @@ class IndecisionApp extends React.Component {
 
     render() {
 
+        const data=[5,4,3,2]
+
        return (
            <div>
         <Header/>
         <Action/>
-        <Options/>
+        <Options data={data}/>
         <Adder/>
            </div>
        )
@@ -46,10 +48,10 @@ class Options extends React.Component {
         return (
 
             <div>
-            <p>Options component</p>
-            <Option/>
+            {
+             this.props.data.map((value,index) => <Option key={value} text={value}/>)
+            }
             </div>
-
         ) 
     }
 }
@@ -60,7 +62,7 @@ render() {
    
     return  (
         <div>
-          <p>Option</p>
+          <p>{this.props.text}</p>
         </div>
     )
 }
@@ -78,4 +80,9 @@ class Adder extends React.Component {
     }
 }
 
+
 ReactDOM.render( <IndecisionApp/>, document.querySelector('#app'))
+
+console.log(check)
+
+

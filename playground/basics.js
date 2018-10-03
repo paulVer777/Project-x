@@ -42,3 +42,14 @@ const boxForRender = document.querySelector('#app')
 //React algorithm - ' little bit of JS code to see if two things are equal or not, it's a whole lot faster than running
 // through the procces of re-rendering  and repainting all those pixels to the browser again.
 // it renders and repaints only changes in objects
+
+
+
+/// return an object, 
+
+// const check = (<div>
+
+//   <p>heja</p>
+//   <p>heja2</p>
+//   </div>
+//   )

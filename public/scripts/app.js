@@ -21,12 +21,14 @@ var IndecisionApp = function (_React$Component) {
         key: 'render',
         value: function render() {
 
+            var data = [5, 4, 3, 2];
+
             return React.createElement(
                 'div',
                 null,
                 React.createElement(Header, null),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { data: data }),
                 React.createElement(Adder, null)
             );
         }
@@ -112,12 +114,9 @@ var Options = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Options component'
-                ),
-                React.createElement(Option, null)
+                this.props.data.map(function (value, index) {
+                    return React.createElement(Option, { key: value, text: value });
+                })
             );
         }
     }]);
@@ -144,7 +143,7 @@ var Option = function (_React$Component5) {
                 React.createElement(
                     'p',
                     null,
-                    'Option'
+                    this.props.text
                 )
             );
         }
@@ -182,3 +181,5 @@ var Adder = function (_React$Component6) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(IndecisionApp, null), document.querySelector('#app'));
+
+console.log(check);
