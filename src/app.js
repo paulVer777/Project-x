@@ -43,11 +43,29 @@ class Action extends React.Component {
 
 class Options extends React.Component {
 
+         constructor(props){
+          super(props)
+           this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
+           // we could do that also in the render method but this approach is more efficient
+           //binding run just once, whe component first gets initialized 
+           // if we would set the bind method 
+
+         }
+
+    removeAll(){
+
+    console.log(this.props.data)
+    }
+
+
+
     render() {
 
         return (
 
             <div>
+             <button onClick={this.removeAll}>Remove All</button>
+
             {
              this.props.data.map((value,index) => <Option key={value} text={value}/>)
             }
@@ -70,9 +88,16 @@ render() {
 
 class Adder extends React.Component {
 
+    addOption(e){
+
+      e.preventDefault()
+      const text=e.target.elements.option.value.trim() // great solution for white spaces (trim method)
+          text && alert(text)
+    }
+
     render() {
         return (
-            <form>
+            <form onSubmit={this.addOption}>
                 <input type='text' name='option'/>
                 <button>Add option</button>
             </form>
@@ -83,6 +108,5 @@ class Adder extends React.Component {
 
 ReactDOM.render( <IndecisionApp/>, document.querySelector('#app'))
 
-console.log(check)
 
 

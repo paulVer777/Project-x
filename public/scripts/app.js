@@ -101,19 +101,37 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.removeAll = _this4.removeAll.bind(_this4); // we set the desired context for removeAll in the constructor, 
+        // we could do that also in the render method but this approach is more efficient
+        //binding run just once, whe component first gets initialized 
+        // if we would set the bind method 
+
+        return _this4;
     }
 
     _createClass(Options, [{
+        key: 'removeAll',
+        value: function removeAll() {
+
+            console.log(this.props.data);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             return React.createElement(
                 'div',
                 null,
+                React.createElement(
+                    'button',
+                    { onClick: this.removeAll },
+                    'Remove All'
+                ),
                 this.props.data.map(function (value, index) {
                     return React.createElement(Option, { key: value, text: value });
                 })
@@ -162,11 +180,19 @@ var Adder = function (_React$Component6) {
     }
 
     _createClass(Adder, [{
+        key: 'addOption',
+        value: function addOption(e) {
+
+            e.preventDefault();
+            var text = e.target.elements.option.value.trim(); // great solution for white spaces (trim method)
+            text && alert(text);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
                 'form',
-                null,
+                { onSubmit: this.addOption },
                 React.createElement('input', { type: 'text', name: 'option' }),
                 React.createElement(
                     'button',
@@ -181,5 +207,3 @@ var Adder = function (_React$Component6) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(IndecisionApp, null), document.querySelector('#app'));
-
-console.log(check);
