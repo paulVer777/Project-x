@@ -56,4 +56,12 @@ const boxForRender = document.querySelector('#app')
 
 
 
-//set state manipulate the state and calls the render method
+//set state manipulate the state and calls the render method 
+
+//calls to setState are asynchronous
+
+//we should use setState with function as a argument, that function has acces to a previous state by argument, 
+//and return an object with values we want to update
+
+
+// using setState and passing object directly is not a good approach.
