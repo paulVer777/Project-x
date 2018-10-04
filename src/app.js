@@ -47,8 +47,8 @@ class Options extends React.Component {
           super(props)
            this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
            // we could do that also in the render method but this approach is more efficient
-           //binding run just once, whe component first gets initialized 
-           // if we would set the bind method 
+           //binding run just once, when component first gets initialized 
+           // if we set the it in render it would rebind all the time render runs
 
          }
 
