@@ -2,20 +2,25 @@
 class Counter extends React.Component {
 
    constructor(props){
-      super(props)
-     this.handleAdd=this.handleAdd.bind(Counter)
-     this.handleSub=this.handleSub.bind(Counter)
-     this.handleRes=this.handleRes.bind(Counter)
-
+      super(props);
+     this.handleAdd=this.handleAdd.bind(this)
+     this.handleSub=this.handleSub.bind(this)
+     this.handleRes=this.handleRes.bind(this)
+     this.state={
+        
+        count:0
+     }
    }
+
+//set state manipulate the state and calls the render method
 
 
  handleAdd(){
-  console.log('add')
-
+  this.setState((prevState)=> ({count:prevState.count+1}))
  }
+
  handleSub(){
-    console.log('minus')
+    this.setState((prevState)=>({count:prevState.count-1}))
 
  }
 handleRes(){
@@ -28,7 +33,7 @@ render(){
   return (
     
     <div>
-    <h1>Indecision</h1>
+    <h1>Count: {this.state.count}</h1>
     <button onClick={this.handleAdd}>+1</button>
     <button onClick={this.handleSub}>-1</button>
     <button onClick={this.handleRes}>reset</button>

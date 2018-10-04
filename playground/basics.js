@@ -53,3 +53,7 @@ const boxForRender = document.querySelector('#app')
 //   <p>heja2</p>
 //   </div>
 //   )
+
+
+
+//set state manipulate the state and calls the render method
