@@ -1,15 +1,37 @@
 
 class IndecisionApp extends React.Component {
 
+      constructor(props){
+          super(props)
+          this.removeAll=this.removeAll.bind(this)
+          this.optionPicker=this.optionPicker.bind(this)
+          this.state={
+              options:[1,2,3,4,5]
+          }
+      }
+
+     removeAll(){
+         this.setState(()=>({options:[]}))
+     }
+
+      optionPicker(){
+          const index = Math.floor(Math.random()*this.state.options.length)
+          alert(this.state.options[index])
+      }
+
     render() {
 
-        const data=[5,4,3,2]
+     const title='Indecision'
 
        return (
            <div>
-        <Header/>
-        <Action/>
-        <Options data={data}/>
+        <Header title={title}/>
+        <Action 
+        optionPicker={this.optionPicker}
+        isAnyOption={this.state.options.length > 0}/>
+        <Options 
+        removeAll={this.removeAll}
+        data={this.state.options}/>
         <Adder/>
            </div>
        )
@@ -22,7 +44,7 @@ class Header extends React.Component {
 
         return (
             <div>
-                <h1>Indecision</h1>
+                <h1>{this.props.title}</h1>
                 <h2>Helpful App</h2>
             </div>
         )
@@ -35,7 +57,7 @@ class Action extends React.Component {
 
         return (
             <div>
-                <button>What should i do?</button>
+                <button disabled={!this.props.isAnyOption} onClick={this.props.optionPicker}>What should i do?</button>
             </div>
         )
     }
@@ -45,26 +67,19 @@ class Options extends React.Component {
 
          constructor(props){
           super(props)
-           this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
+        //    this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
            // we could do that also in the render method but this approach is more efficient
            //binding run just once, when component first gets initialized 
            // if we set the it in render it would rebind all the time render runs
 
          }
 
-    removeAll(){
-
-    console.log(this.props.data)
-    }
-
-
-
     render() {
 
         return (
 
             <div>
-             <button onClick={this.removeAll}>Remove All</button>
+             <button onClick={this.props.removeAll}>Remove All</button>
 
             {
              this.props.data.map((value,index) => <Option key={value} text={value}/>)

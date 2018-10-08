@@ -5,7 +5,7 @@ class Toggler extends React.Component {
      constructor(props){
          super(props)
           this.toggleHandler=this.toggleHandler.bind(this)
-         this.state={
+           this.state={
              hidden:true,
              message:'This is message from state that is located in Toggler constructor'
          }
@@ -34,9 +34,9 @@ class Toggler extends React.Component {
 
 ReactDOM.render(<Toggler/>,document.querySelector('#app'))
 
+const score = 2 && 0 
 
-
-
+console.log(score)
 
 
 
