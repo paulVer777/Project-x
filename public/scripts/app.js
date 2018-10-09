@@ -81,155 +81,91 @@ var IndecisionApp = function (_React$Component) {
     return IndecisionApp;
 }(React.Component);
 
-var Header = function (_React$Component2) {
-    _inherits(Header, _React$Component2);
+var Header = function Header(props) {
 
-    function Header() {
-        _classCallCheck(this, Header);
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            props.title
+        ),
+        React.createElement(
+            'h2',
+            null,
+            'Helpful App'
+        )
+    );
+};
 
-        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-    }
+var Action = function Action(props) {
 
-    _createClass(Header, [{
-        key: 'render',
-        value: function render() {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { disabled: !props.isAnyOption, onClick: props.optionPicker },
+            'What should i do?'
+        )
+    );
+};
 
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'h1',
-                    null,
-                    this.props.title
-                ),
-                React.createElement(
-                    'h2',
-                    null,
-                    'Helpful App'
-                )
-            );
-        }
-    }]);
+var Options = function Options(props) {
 
-    return Header;
-}(React.Component);
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { onClick: props.removeAll },
+            'Remove All'
+        ),
+        props.data.map(function (value, index) {
+            return React.createElement(Option, { key: value, text: value });
+        })
+    );
+};
 
-var Action = function (_React$Component3) {
-    _inherits(Action, _React$Component3);
+var Option = function Option(props) {
 
-    function Action() {
-        _classCallCheck(this, Action);
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'p',
+            null,
+            props.text
+        )
+    );
+};
 
-        return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
-    }
-
-    _createClass(Action, [{
-        key: 'render',
-        value: function render() {
-
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'button',
-                    { disabled: !this.props.isAnyOption, onClick: this.props.optionPicker },
-                    'What should i do?'
-                )
-            );
-        }
-    }]);
-
-    return Action;
-}(React.Component);
-
-var Options = function (_React$Component4) {
-    _inherits(Options, _React$Component4);
-
-    function Options(props) {
-        _classCallCheck(this, Options);
-
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
-        //    this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
-        // we could do that also in the render method but this approach is more efficient
-        //binding run just once, when component first gets initialized 
-        // if we set the it in render it would rebind all the time render runs
-    }
-
-    _createClass(Options, [{
-        key: 'render',
-        value: function render() {
-
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'button',
-                    { onClick: this.props.removeAll },
-                    'Remove All'
-                ),
-                this.props.data.map(function (value, index) {
-                    return React.createElement(Option, { key: value, text: value });
-                })
-            );
-        }
-    }]);
-
-    return Options;
-}(React.Component);
-
-var Option = function (_React$Component5) {
-    _inherits(Option, _React$Component5);
-
-    function Option() {
-        _classCallCheck(this, Option);
-
-        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
-    }
-
-    _createClass(Option, [{
-        key: 'render',
-        value: function render() {
-
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'p',
-                    null,
-                    this.props.text
-                )
-            );
-        }
-    }]);
-
-    return Option;
-}(React.Component);
-
-var Adder = function (_React$Component6) {
-    _inherits(Adder, _React$Component6);
+var Adder = function (_React$Component2) {
+    _inherits(Adder, _React$Component2);
 
     function Adder(props) {
         _classCallCheck(this, Adder);
 
-        var _this6 = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
 
-        _this6.addOption = _this6.addOption.bind(_this6);
-        _this6.state = {
+        _this2.addOption = _this2.addOption.bind(_this2);
+        _this2.state = {
             error: undefined
         };
-        return _this6;
+        return _this2;
     }
 
     _createClass(Adder, [{
         key: 'addOption',
         value: function addOption(e) {
-            var _this7 = this;
+            var _this3 = this;
 
             e.preventDefault();
             var text = e.target.elements.option.value.trim(); // great solution for white spaces (trim method)
 
             this.setState(function () {
-                return { error: _this7.props.addOption(text) };
+                return { error: _this3.props.addOption(text) };
             });
         }
     }, {

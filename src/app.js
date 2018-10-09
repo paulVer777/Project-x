@@ -58,67 +58,50 @@ class IndecisionApp extends React.Component {
     }
 }
 
-class Header extends React.Component {
-
-    render() {
+const Header = (props) => {
 
         return (
             <div>
-                <h1>{this.props.title}</h1>
+                <h1>{props.title}</h1>
                 <h2>Helpful App</h2>
             </div>
         )
-    }
 }
 
-class Action extends React.Component {
 
-    render() {
+const Action = (props) =>{
 
-        return (
-            <div>
-                <button disabled={!this.props.isAnyOption} onClick={this.props.optionPicker}>What should i do?</button>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <button disabled={!props.isAnyOption} onClick={props.optionPicker}>What should i do?</button>
+        </div>
+    )
 }
 
-class Options extends React.Component {
 
-         constructor(props){
-          super(props)
-        //    this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
-           // we could do that also in the render method but this approach is more efficient
-           //binding run just once, when component first gets initialized 
-           // if we set the it in render it would rebind all the time render runs
 
-         }
-
-    render() {
+const  Options = (props) => {
 
         return (
 
             <div>
-             <button onClick={this.props.removeAll}>Remove All</button>
+             <button onClick={props.removeAll}>Remove All</button>
 
             {
-             this.props.data.map((value,index) => <Option key={value} text={value}/>)
+             props.data.map((value,index) => <Option key={value} text={value}/>)
             }
             </div>
         ) 
     }
-}
 
-class Option extends React.Component {
 
-render() {
-   
+const Option = (props) => {
+
     return  (
         <div>
-          <p>{this.props.text}</p>
+          <p>{props.text}</p>
         </div>
     )
-}
 }
 
 class Adder extends React.Component {

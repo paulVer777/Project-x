@@ -43,3 +43,31 @@ console.log(add(5)(5))
 
 
 
+
+
+
+class Options extends React.Component {
+
+    constructor(props){
+     super(props)
+      this.removeAll=this.removeAll.bind(this) // we set the desired context for removeAll in the constructor, 
+      // we could do that also in the render method but this approach is more efficient
+      //binding run just once, when component first gets initialized 
+      // if we set the it in render it would rebind all the time render runs
+
+    }
+
+render() {
+
+   return (
+
+       <div>
+        <button onClick={this.props.removeAll}>Remove All</button>
+
+       {
+        this.props.data.map((value,index) => <Option key={value} text={value}/>)
+       }
+       </div>
+   ) 
+}
+}
