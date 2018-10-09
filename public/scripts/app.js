@@ -20,7 +20,7 @@ var IndecisionApp = function (_React$Component) {
         _this.optionPicker = _this.optionPicker.bind(_this);
         _this.addOption = _this.addOption.bind(_this);
         _this.state = {
-            options: []
+            options: _this.props.options // if props are not provided the default value is going to be used
         };
         return _this;
     }
@@ -66,7 +66,7 @@ var IndecisionApp = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, { title: title }),
+                React.createElement(Header, { subtitle: 'Keep on' }),
                 React.createElement(Action, {
                     optionPicker: this.optionPicker,
                     isAnyOption: this.state.options.length > 0 }),
@@ -81,6 +81,10 @@ var IndecisionApp = function (_React$Component) {
     return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+    options: ['ss', 'gg']
+};
+
 var Header = function Header(props) {
 
     return React.createElement(
@@ -91,12 +95,17 @@ var Header = function Header(props) {
             null,
             props.title
         ),
-        React.createElement(
+        props.subtitle && React.createElement(
             'h2',
             null,
-            'Helpful App'
+            props.subtitle
         )
     );
+};
+
+Header.defaultProps = { // default props are used if we dont provide any props to a component
+
+    title: 'Indecision App'
 };
 
 var Action = function Action(props) {
@@ -196,4 +205,4 @@ var Adder = function (_React$Component2) {
     return Adder;
 }(React.Component);
 
-ReactDOM.render(React.createElement(IndecisionApp, null), document.querySelector('#app'));
+ReactDOM.render(React.createElement(IndecisionApp, { options: ['new', 'new2'] }), document.querySelector('#app'));

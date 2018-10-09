@@ -7,7 +7,7 @@ class IndecisionApp extends React.Component {
           this.optionPicker=this.optionPicker.bind(this)
           this.addOption=this.addOption.bind(this)
           this.state={
-              options:[]
+              options:this.props.options // if props are not provided the default value is going to be used
           }
       }
 
@@ -45,7 +45,7 @@ class IndecisionApp extends React.Component {
     
        return (
            <div>
-        <Header title={title}/>
+        <Header subtitle={'Keep on'}/>
         <Action 
         optionPicker={this.optionPicker}
         isAnyOption={this.state.options.length > 0}/>
@@ -58,14 +58,23 @@ class IndecisionApp extends React.Component {
     }
 }
 
+IndecisionApp.defaultProps={
+    options:['ss','gg']
+}
+
 const Header = (props) => {
 
         return (
             <div>
                 <h1>{props.title}</h1>
-                <h2>Helpful App</h2>
+                {props.subtitle&&<h2>{props.subtitle}</h2>}
             </div>
         )
+}
+
+Header.defaultProps = { // default props are used if we dont provide any props to a component
+
+    title:'Indecision App'
 }
 
 
@@ -138,7 +147,7 @@ class Adder extends React.Component {
 }
 
 
-ReactDOM.render( <IndecisionApp/>, document.querySelector('#app'))
+ReactDOM.render( <IndecisionApp options={['new','new2']}/>, document.querySelector('#app'))
 
 
 
