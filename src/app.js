@@ -5,8 +5,9 @@ class IndecisionApp extends React.Component {
           super(props)
           this.removeAll=this.removeAll.bind(this)
           this.optionPicker=this.optionPicker.bind(this)
+          this.addOption=this.addOption.bind(this)
           this.state={
-              options:[1,2,3,4,5]
+              options:[]
           }
       }
 
@@ -18,11 +19,30 @@ class IndecisionApp extends React.Component {
           const index = Math.floor(Math.random()*this.state.options.length)
           alert(this.state.options[index])
       }
+     addOption(option){
+           
+        if(!option){
+            return 'type the correct name'
+        }
+        else if(this.state.options.indexOf(option) > -1)
+        {
+            return 'this option already exists'
+        }
 
+
+         this.setState((prevState)=>({
+             options:prevState.options.concat(option) //we never want to manipulate the state or the previous state here
+             // thats why we can't use push instead of concat,we want to compute new one
+             //concat nie zmienia oryginalnej tablicy, lecz zwraca jej kopię 
+             //concat doesnt change the original array instead it returns its copy thats why we want to use it here
+         }))
+        
+     }
+    
     render() {
 
      const title='Indecision'
-
+    
        return (
            <div>
         <Header title={title}/>
@@ -32,7 +52,7 @@ class IndecisionApp extends React.Component {
         <Options 
         removeAll={this.removeAll}
         data={this.state.options}/>
-        <Adder/>
+        <Adder addOption={this.addOption}/>
            </div>
        )
     }
@@ -102,20 +122,34 @@ render() {
 }
 
 class Adder extends React.Component {
-
+        
+    constructor(props){
+        super(props)
+        this.addOption=this.addOption.bind(this)
+        this.state= {
+            error:undefined
+        }
+    }
     addOption(e){
-
-      e.preventDefault()
-      const text=e.target.elements.option.value.trim() // great solution for white spaces (trim method)
-          text && alert(text)
+      
+          e.preventDefault()
+          const text=e.target.elements.option.value.trim() // great solution for white spaces (trim method)
+          
+          this.setState(()=>({error:this.props.addOption(text)}))
+          
+          
     }
 
     render() {
         return (
+           <div>
+            {this.state.error && <p>{this.state.error}</p>}
+             
             <form onSubmit={this.addOption}>
                 <input type='text' name='option'/>
                 <button>Add option</button>
             </form>
+            </div>
         )
     }
 }

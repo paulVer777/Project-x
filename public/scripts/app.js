@@ -18,8 +18,9 @@ var IndecisionApp = function (_React$Component) {
 
         _this.removeAll = _this.removeAll.bind(_this);
         _this.optionPicker = _this.optionPicker.bind(_this);
+        _this.addOption = _this.addOption.bind(_this);
         _this.state = {
-            options: [1, 2, 3, 4, 5]
+            options: []
         };
         return _this;
     }
@@ -38,6 +39,25 @@ var IndecisionApp = function (_React$Component) {
             alert(this.state.options[index]);
         }
     }, {
+        key: 'addOption',
+        value: function addOption(option) {
+
+            if (!option) {
+                return 'type the correct name';
+            } else if (this.state.options.indexOf(option) > -1) {
+                return 'this option already exists';
+            }
+
+            this.setState(function (prevState) {
+                return {
+                    options: prevState.options.concat(option) //we never want to manipulate the state or the previous state here
+                    // thats why we can't use push instead of concat,we want to compute new one
+                    //concat nie zmienia oryginalnej tablicy, lecz zwraca jej kopię 
+                    //concat doesnt change the original array instead it returns its copy thats why we want to use it here
+                };
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -53,7 +73,7 @@ var IndecisionApp = function (_React$Component) {
                 React.createElement(Options, {
                     removeAll: this.removeAll,
                     data: this.state.options }),
-                React.createElement(Adder, null)
+                React.createElement(Adder, { addOption: this.addOption })
             );
         }
     }]);
@@ -188,31 +208,50 @@ var Option = function (_React$Component5) {
 var Adder = function (_React$Component6) {
     _inherits(Adder, _React$Component6);
 
-    function Adder() {
+    function Adder(props) {
         _classCallCheck(this, Adder);
 
-        return _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
+
+        _this6.addOption = _this6.addOption.bind(_this6);
+        _this6.state = {
+            error: undefined
+        };
+        return _this6;
     }
 
     _createClass(Adder, [{
         key: 'addOption',
         value: function addOption(e) {
+            var _this7 = this;
 
             e.preventDefault();
             var text = e.target.elements.option.value.trim(); // great solution for white spaces (trim method)
-            text && alert(text);
+
+            this.setState(function () {
+                return { error: _this7.props.addOption(text) };
+            });
         }
     }, {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'form',
-                { onSubmit: this.addOption },
-                React.createElement('input', { type: 'text', name: 'option' }),
-                React.createElement(
-                    'button',
+                'div',
+                null,
+                this.state.error && React.createElement(
+                    'p',
                     null,
-                    'Add option'
+                    this.state.error
+                ),
+                React.createElement(
+                    'form',
+                    { onSubmit: this.addOption },
+                    React.createElement('input', { type: 'text', name: 'option' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Add option'
+                    )
                 )
             );
         }
