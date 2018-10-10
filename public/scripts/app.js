@@ -1,4 +1,6 @@
-"use strict";
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14,11 +16,91 @@ var Counter = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
 
+        _this.adder = _this.adder.bind(_this);
+        _this.substractor = _this.substractor.bind(_this);
+        _this.reseter = _this.reseter.bind(_this);
+
         _this.state = {
             count: 0
         };
         return _this;
     }
 
+    _createClass(Counter, [{
+        key: 'adder',
+        value: function adder() {
+            this.setState(function (prevState) {
+                return { count: prevState.count + 1 };
+            });
+        }
+    }, {
+        key: 'substractor',
+        value: function substractor() {
+            this.setState(function (prevState) {
+                return { count: prevState.count - 1 };
+            });
+        }
+    }, {
+        key: 'reseter',
+        value: function reseter() {
+            this.setState(function (prevState) {
+                return { count: 0 };
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+
+            var data = parseInt(localStorage.getItem('Count'));
+
+            typeof data === 'number' && this.setState(function (prevState) {
+                return { count: data };
+            });
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+
+            localStorage.setItem('Count', this.state.count);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    'Counter'
+                ),
+                React.createElement(
+                    'h2',
+                    null,
+                    'Score: ',
+                    this.state.count
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: this.adder },
+                    '+'
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: this.substractor },
+                    '-'
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: this.reseter },
+                    'reset'
+                )
+            );
+        }
+    }]);
+
     return Counter;
 }(React.Component);
+
+ReactDOM.render(React.createElement(Counter, null), document.querySelector('#app'));
