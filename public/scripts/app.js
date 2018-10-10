@@ -59,9 +59,11 @@ var Counter = function (_React$Component) {
         }
     }, {
         key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
+        value: function componentDidUpdate(prevProps, prevState) {
 
-            localStorage.setItem('Count', this.state.count);
+            var ret = prevState.count !== this.state.count && localStorage.setItem('Count', this.state.count);
+            // in order to prevent firing setItem every time componentDidUp fires we added condition which cause
+            // firing setItem only when prevState differs from actual state
         }
     }, {
         key: 'render',

@@ -26,18 +26,18 @@
 
             componentDidMount(){
                 
+                
                 const data = parseInt(localStorage.getItem('Count'))
                  
-                
-
                 !isNaN(data) && this.setState((prevState)=>({count:data})) 
 
             }
 
-            componentDidUpdate(){
+            componentDidUpdate(prevProps, prevState){
             
-                localStorage.setItem('Count',this.state.count)
-                
+            const ret=prevState.count !== this.state.count && localStorage.setItem('Count',this.state.count)
+               // in order to prevent firing setItem every time componentDidUp fires we added condition which cause
+               // firing setItem only when prevState differs from actual state
             }
 
         render(){
