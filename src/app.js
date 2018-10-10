@@ -39,8 +39,9 @@
                 // thats why we can't use push instead of concat,we want to compute new one
                 //concat nie zmienia oryginalnej tablicy, lecz zwraca jej kopię 
                 //concat doesnt change the original array instead it returns its copy thats why we want to use it here
-            }))
-            
+           
+            }),() => console.log(this.state.options))//callback executes when setStat finishes its own operations
+               
         }
     
                 componentDidMount(prevProps,prevState){
