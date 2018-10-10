@@ -65,3 +65,9 @@ const boxForRender = document.querySelector('#app')
 
 
 // using setState and passing object directly is not a good approach.
+
+
+
+
+// for example changing a state from a empty array to a new empty array will cause firing the componentDidUpdate method,
+//even if state didnt change
