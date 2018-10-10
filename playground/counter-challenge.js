@@ -28,7 +28,9 @@
                 
                 const data = parseInt(localStorage.getItem('Count'))
                  
-                typeof data === 'number' && this.setState((prevState)=>({count:data})) 
+                
+
+                !isNaN(data) && this.setState((prevState)=>({count:data})) 
 
             }
 

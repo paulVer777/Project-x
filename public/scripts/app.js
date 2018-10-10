@@ -53,7 +53,7 @@ var Counter = function (_React$Component) {
 
             var data = parseInt(localStorage.getItem('Count'));
 
-            typeof data === 'number' && this.setState(function (prevState) {
+            !isNaN(data) && this.setState(function (prevState) {
                 return { count: data };
             });
         }
