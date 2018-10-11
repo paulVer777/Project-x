@@ -17,60 +17,15 @@ var Todo = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
 
         _this.state = {
-            todo: []
-
+            todos: []
         };
-        _this.addTodo = _this.addTodo.bind(_this);
-        _this.removeTodo = _this.removeTodo.bind(_this);
+        _this.addQuestHandler = _this.addQuestHandler.bind(_this);
+        _this.removeQuestHandler = _this.removeQuestHandler.bind(_this);
+        _this.removeAll = _this.removeAll.bind(_this);
         return _this;
     }
 
     _createClass(Todo, [{
-        key: 'addTodo',
-        value: function addTodo(text, uid) {
-            var _this2 = this;
-
-            if (!text) {
-                return 'Please provide correct name';
-            } else if (!this.state.todo.every(function (value, index) {
-                return value.name !== text;
-            })) {
-                return 'Name already exists';
-            }
-
-            this.setState(function (prevState) {
-                return { todo: prevState.todo.concat({ name: text, id: uid }) };
-            }, function () {
-                return console.log(_this2.state);
-            });
-        }
-    }, {
-        key: 'removeTodo',
-        value: function removeTodo(item) {
-            this.setState(function (prevState) {
-                return { todo: prevState.todo.filter(function (value, index) {
-                        return value.id !== item;
-                    }) };
-            });
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-
-            var data = JSON.parse(localStorage.getItem('Todos'));
-
-            this.setState(function (prevState) {
-                return { todo: data };
-            });
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-
-            console.log('up');
-            localStorage.setItem('Todos', JSON.stringify(this.state.todo));
-        }
-    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -82,12 +37,67 @@ var Todo = function (_React$Component) {
                     'Todo'
                 ),
                 React.createElement(List, {
-
-                    data: this.state.todo,
-                    removeTodo: this.removeTodo
+                    todos: this.state.todos,
+                    removeQuestHandler: this.removeQuestHandler,
+                    removeAll: this.removeAll
                 }),
-                React.createElement(Adder, { addTodo: this.addTodo })
+                React.createElement(Adder, { addQuestHandler: this.addQuestHandler })
             );
+        }
+    }, {
+        key: 'addQuestHandler',
+        value: function addQuestHandler(text, uid) {
+            var _this2 = this;
+
+            if (!text) {
+                return 'Please type correct quests name';
+            } else if (!this.state.todos.every(function (value, index) {
+                return value.name !== text;
+            })) {
+                return 'Quest name already exists';
+            }
+
+            this.setState(function (prevState) {
+                return {
+                    todos: prevState.todos.concat({ name: text, id: uid })
+                };
+            }, function () {
+                return console.log(_this2.state);
+            });
+        }
+    }, {
+        key: 'removeQuestHandler',
+        value: function removeQuestHandler(id) {
+            this.setState(function (prevState) {
+                return { todos: prevState.todos.filter(function (value, index) {
+                        return value.id !== id;
+                    }) };
+            });
+        }
+    }, {
+        key: 'removeAll',
+        value: function removeAll() {
+            this.setState(function (prevState) {
+                return { todos: [] };
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var data = JSON.parse(localStorage.getItem('Todos'));
+            this.setState(function (prevState) {
+                return { todos: data };
+            });
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+
+            if (prevState.todos.length !== this.state.todos.length) {
+
+                localStorage.setItem('Todos', JSON.stringify(this.state.todos));
+                console.log('componentDidUpadate');
+            }
         }
     }]);
 
@@ -95,36 +105,34 @@ var Todo = function (_React$Component) {
 }(React.Component);
 
 var List = function List(props) {
-
     return React.createElement(
         'div',
         null,
-        props.data.map(function (value, index) {
-            return React.createElement(Item, {
-
-                removeTodo: function removeTodo() {
-                    return props.removeTodo(value.id);
-                },
-                name: value.name,
-                key: value.id
-            });
-        })
+        props.todos.map(function (value, index) {
+            return React.createElement(Quest, { obj: value, key: value.id, removeQuestHandler: function removeQuestHandler() {
+                    return props.removeQuestHandler(value.id);
+                } });
+        }),
+        React.createElement(
+            'button',
+            { onClick: props.removeAll },
+            'Remove All'
+        )
     );
 };
 
-var Item = function Item(props) {
-
+var Quest = function Quest(props) {
     return React.createElement(
         'div',
         null,
         React.createElement(
             'span',
             null,
-            props.name
+            props.obj.name
         ),
         React.createElement(
             'button',
-            { onClick: props.removeTodo },
+            { onClick: props.removeQuestHandler },
             'Remove'
         )
     );
@@ -138,41 +146,36 @@ var Adder = function (_React$Component2) {
 
         var _this3 = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
 
-        _this3.getText = _this3.getText.bind(_this3);
-        _this3.getUid = _this3.getUid.bind(_this3);
         _this3.state = {
             error: undefined
         };
+        _this3.getData = _this3.getData.bind(_this3);
+        _this3.getUid = _this3.getUid.bind(_this3);
         return _this3;
     }
 
     _createClass(Adder, [{
         key: 'getUid',
         value: function getUid() {
-
-            var id = Math.random() * 5;
-            var str = id + '1';
-            return str;
+            return Math.random() * Math.random() + '1';
         }
     }, {
-        key: 'getText',
-        value: function getText(e) {
+        key: 'getData',
+        value: function getData(event) {
+            event.preventDefault();
 
-            e.preventDefault();
-            var text = e.target.elements.todo.value;
+            var text = event.target.elements.quest.value;
+            var uid = this.getUid();
 
-            var error = this.props.addTodo(text, this.getUid());
+            var error = this.props.addQuestHandler(text, uid);
 
             this.setState(function (prevState) {
                 return { error: error };
             });
-
-            if (!error) e.target.elements.todo.value = '';
         }
     }, {
         key: 'render',
         value: function render() {
-
             return React.createElement(
                 'div',
                 null,
@@ -183,8 +186,8 @@ var Adder = function (_React$Component2) {
                 ),
                 React.createElement(
                     'form',
-                    { onSubmit: this.getText },
-                    React.createElement('input', { type: 'text', name: 'todo' }),
+                    { onSubmit: this.getData },
+                    React.createElement('input', { type: 'text', name: 'quest' }),
                     React.createElement(
                         'button',
                         null,

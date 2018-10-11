@@ -31,17 +31,18 @@
              this.setState((prevState)=>({todo:prevState.todo.filter((value,index) => value.id !== item )}))
         }
 
-       componentDidMount(){
-
+       componentDidMount(prevProps, prevState){
+        
         const data= JSON.parse(localStorage.getItem('Todos'))
          
         this.setState((prevState)=>({todo:data}))
        }
 
-       componentDidUpdate(){
-           
-         console.log('up')
-         localStorage.setItem('Todos',JSON.stringify(this.state.todo))
+       componentDidUpdate(prevProps, prevState){
+
+          !prevState.todos.length === this.state.todos.length && localStorage.setItem('Todos', JSON.stringify(this.state.todo))
+
+         
 
        }
 
@@ -112,7 +113,6 @@
                     e.preventDefault()
                     const text = e.target.elements.todo.value
                 
-
                     const error=this.props.addTodo(text,this.getUid())
                     
                     this.setState((prevState) => ({error}))
