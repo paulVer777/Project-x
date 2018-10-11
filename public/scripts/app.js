@@ -17,11 +17,13 @@ var Todo = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
 
         _this.state = {
-            todos: []
+            todos: [],
+            sortBy: undefined
         };
         _this.addQuestHandler = _this.addQuestHandler.bind(_this);
         _this.removeQuestHandler = _this.removeQuestHandler.bind(_this);
         _this.removeAll = _this.removeAll.bind(_this);
+        _this.sortHandler = _this.sortHandler.bind(_this);
         return _this;
     }
 
@@ -36,6 +38,7 @@ var Todo = function (_React$Component) {
                     null,
                     'Todo'
                 ),
+                React.createElement(Sort, { sortHandler: this.sortHandler }),
                 React.createElement(List, {
                     todos: this.state.todos,
                     removeQuestHandler: this.removeQuestHandler,
@@ -43,6 +46,11 @@ var Todo = function (_React$Component) {
                 }),
                 React.createElement(Adder, { addQuestHandler: this.addQuestHandler })
             );
+        }
+    }, {
+        key: 'sortHandler',
+        value: function sortHandler(value) {
+            console.log(value);
         }
     }, {
         key: 'addQuestHandler',
@@ -109,9 +117,7 @@ var List = function List(props) {
         'div',
         null,
         props.todos.map(function (value, index) {
-            return React.createElement(Quest, { obj: value, key: value.id, removeQuestHandler: function removeQuestHandler() {
-                    return props.removeQuestHandler(value.id);
-                } });
+            return React.createElement(Quest, { obj: value, key: value.id, removeQuestHandler: props.removeQuestHandler });
         }),
         React.createElement(
             'button',
@@ -120,6 +126,52 @@ var List = function List(props) {
         )
     );
 };
+
+var Sort = function (_React$Component2) {
+    _inherits(Sort, _React$Component2);
+
+    function Sort(props) {
+        _classCallCheck(this, Sort);
+
+        var _this3 = _possibleConstructorReturn(this, (Sort.__proto__ || Object.getPrototypeOf(Sort)).call(this, props));
+
+        _this3.getValuer = _this3.getValuer.bind(_this3);
+        return _this3;
+    }
+
+    _createClass(Sort, [{
+        key: 'getValuer',
+        value: function getValuer(event) {
+
+            var value = event.target.value;
+            this.props.sortHandler(value);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'select',
+                    { onChange: this.getValuer },
+                    React.createElement(
+                        'option',
+                        { value: 'one' },
+                        'One'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: 'alpha' },
+                        'Alphabetical'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Sort;
+}(React.Component);
 
 var Quest = function Quest(props) {
     return React.createElement(
@@ -132,26 +184,28 @@ var Quest = function Quest(props) {
         ),
         React.createElement(
             'button',
-            { onClick: props.removeQuestHandler },
-            'Remove'
+            { onClick: function onClick() {
+                    return props.removeQuestHandler(props.obj.id);
+                } },
+            ' Remove '
         )
     );
 };
 
-var Adder = function (_React$Component2) {
-    _inherits(Adder, _React$Component2);
+var Adder = function (_React$Component3) {
+    _inherits(Adder, _React$Component3);
 
     function Adder(props) {
         _classCallCheck(this, Adder);
 
-        var _this3 = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
+        var _this4 = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
 
-        _this3.state = {
+        _this4.state = {
             error: undefined
         };
-        _this3.getData = _this3.getData.bind(_this3);
-        _this3.getUid = _this3.getUid.bind(_this3);
-        return _this3;
+        _this4.getData = _this4.getData.bind(_this4);
+        _this4.getUid = _this4.getUid.bind(_this4);
+        return _this4;
     }
 
     _createClass(Adder, [{

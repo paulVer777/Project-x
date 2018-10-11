@@ -4,16 +4,19 @@ class Todo extends React.Component {
        constructor(props){
            super(props)
            this.state={
-               todos:[]
+               todos:[],
+               sortBy:undefined
            }
            this.addQuestHandler = this.addQuestHandler.bind(this)
            this.removeQuestHandler = this.removeQuestHandler.bind(this) 
            this.removeAll = this.removeAll.bind(this) 
+           this.sortHandler = this.sortHandler.bind(this) 
        }
        render(){
            return(
                <div>
                <h1>Todo</h1>
+               <Sort sortHandler={this.sortHandler}/>
                <List
                 todos={this.state.todos}
                 removeQuestHandler={this.removeQuestHandler}
@@ -23,6 +26,11 @@ class Todo extends React.Component {
                </div>
            )
        }
+
+       sortHandler(value){
+       console.log(value)
+       }
+
        addQuestHandler(text,uid){
           
         if(!text){
@@ -35,7 +43,7 @@ class Todo extends React.Component {
         
         this.setState((prevState)=>({
               todos:prevState.todos.concat({name:text,id:uid})
-          }),()=>console.log(this.state))
+          }),() => console.log(this.state))
           
        }
        removeQuestHandler(id){
@@ -63,20 +71,44 @@ class Todo extends React.Component {
        }
 }
 
-const List = (props)=>{
+const List = (props) => {
     return(
         <div>
-        {props.todos.map((value,index) => <Quest obj = {value} key = {value.id} removeQuestHandler={() => props.removeQuestHandler(value.id)}/> )}
+        {props.todos.map((value,index) => <Quest obj = {value} key = {value.id} removeQuestHandler = { props.removeQuestHandler}/> )}
         <button onClick={props.removeAll}>Remove All</button>
         </div>
     )
+}
+
+class Sort extends React.Component {
+
+       constructor(props){
+           super(props)
+           this.getValuer=this.getValuer.bind(this)
+       }
+       getValuer(event){
+        
+         const value = event.target.value
+         this.props.sortHandler(value)
+       }
+            
+    render(){
+        return(
+            <div>
+            <select onChange={this.getValuer}>
+           <option value='one' >One</option>
+           <option value='alpha' >Alphabetical</option>
+           </select>
+            </div>
+        )
+    }
 }
 
 const Quest = (props) => {
     return(
         <div>
         <span>{props.obj.name}</span>
-        <button onClick={props.removeQuestHandler}>Remove</button>
+        <button onClick={ () => props.removeQuestHandler(props.obj.id)}> Remove </button> 
         </div>
     )
 }
