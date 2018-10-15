@@ -23,6 +23,9 @@ output:{
     filename:'bundle.js' // name of a output file
 },
 //Setting the loader
+//Loader - way to define how a file gets transformed when webpack uses it
+// for example any time webpack sees app.js file we can do something with that file like for exapmle 
+// run it through babel ( converting es6 to es5 and jsx to regular react create elements calls in order to browsers understands it)
 
 module:{
     rules:[{ //array of rules, for now we just want the babel running, later we will add more like sass etc
@@ -32,11 +35,8 @@ module:{
     }]
     //whenever you see a js file that is not located on node modules go ahead and run it through babel
     // so that includes our entry file and any files that app js imports
+},
+devtool:'cheap-module-eval-source-map' //figures out where the original line was, makes debuggin way faster ( after transpilling process  )
+
 }
 
-
-}
-
-//Loader - way to define how a file gets transformed when webpack uses it
-// for example any time webpack sees app.js file we can do something with that file like for exapmle 
-// run it through babel ( converting es6 to es5 and jsx to regular react create elements calls in order to browsers understands it)
