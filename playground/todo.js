@@ -15,7 +15,7 @@ class Todo extends React.Component {
        render(){
            return(
                <div>
-               <h1>Todo</h1>
+               <h1>Todos</h1>
                <Sort sortHandler={this.sortHandler}/>
                <List
                 todos={this.state.todos}

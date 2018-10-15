@@ -71,3 +71,14 @@ const boxForRender = document.querySelector('#app')
 
 // for example changing a state from a empty array to a new empty array will cause firing the componentDidUpdate method,
 //even if state didnt change
+
+
+//import export
+
+//import validator from 'validator' - webpack is going to look for a module in the node modules folder with the same name we provided
+// import utils from './utils - dot and slash, we are going to use 'our' file not a 3rd party module
+
+
+
+// import React from 'react' 
+// import ReactDOM from 'react-dom' - we import react from node modules installed package
