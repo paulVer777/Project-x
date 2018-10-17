@@ -38,12 +38,13 @@ module:{
 
     //CSS - 
     {
-      test:/\.scss$/, // target all files that ends ($) with .css . Every time webpack meet the scss file its going to load that file (css loader),compile to sass ()
+        // ?- it makes 's' letter optional so now webpack can handle css and scss (needed to normalize css)
+      test:/\.s?css$/, // target all files that ends ($) with .css . Every time webpack meet the scss file its going to load that file (css loader),compile to sass ()
        //and dump its content int a DOM in a style tag (style-loader)
       use:[ // use alows us to provide us arrays of loaders
-          'style-loader',
-          'css-loader',
-          'sass-loader' // behind scenes sass loader uses node-sass to convert file to css
+        'style-loader',
+        'css-loader',
+        'sass-loader' // behind scenes sass loader uses node-sass to convert file to css
         ]
        //steps: 
        //1. get the code

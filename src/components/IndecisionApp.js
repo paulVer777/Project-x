@@ -1,11 +1,12 @@
 
-import React from 'react' 
-import Adder from './AddOption'
-import Header from './Header'
-import Action from './action'
-import Options from './Options'
-import OptionModal from './OptionModal'
-import '../styles/styles.scss' 
+import React from 'react' ;
+import Adder from './AddOption';
+import Header from './Header';
+import Action from './action';
+import Options from './Options';
+import OptionModal from './OptionModal';
+import 'normalize.css';
+import '../styles/styles.scss' ;
 
 export default class IndecisionApp extends React.Component {
 
