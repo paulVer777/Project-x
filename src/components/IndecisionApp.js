@@ -5,6 +5,7 @@ import Header from './Header'
 import Action from './action'
 import Options from './Options'
 import OptionModal from './OptionModal'
+import '../styles/styles.scss' 
 
 export default class IndecisionApp extends React.Component {
 

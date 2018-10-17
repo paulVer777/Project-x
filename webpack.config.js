@@ -31,9 +31,26 @@ module:{
         loader:'babel-loader', // name of loader
         test: /\.js$/, // what files do we actually want to run this loader on (we want run only on js files ) | run babel every time webpack see js file we wrote
         exclude: /node_modules/ //excludes a given set of files that we dont want to run loader on
-    }]
+    },
     //whenever you see a js file that is not located on node modules go ahead and run it through babel
     // so that includes our entry file and any files that app js imports
+
+
+    //CSS - 
+    {
+      test:/\.scss$/, // target all files that ends ($) with .css . Every time webpack meet the scss file its going to load that file (css loader),compile to sass ()
+       //and dump its content int a DOM in a style tag (style-loader)
+      use:[ // use alows us to provide us arrays of loaders
+          'style-loader',
+          'css-loader',
+          'sass-loader' // behind scenes sass loader uses node-sass to convert file to css
+        ]
+       //steps: 
+       //1. get the code
+       //2. convert scss to css
+       //3. get it shwoing up in the browser by dumping it into a style tag(head)  
+    }
+]
 },
 devtool:'cheap-module-eval-source-map', //figures out where the original line was, makes debuggin way faster ( after transpilling process  )
 
