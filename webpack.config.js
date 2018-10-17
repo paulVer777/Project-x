@@ -15,7 +15,6 @@ const path = require('path') //module for paths manipulations
 // the basic webpack config includes the module bundler
 //that allows us to break up our apps into multiple files (es6 modules supported)
 
-
 module.exports = {
 entry:'./src/app.js',
 output:{
@@ -36,7 +35,11 @@ module:{
     //whenever you see a js file that is not located on node modules go ahead and run it through babel
     // so that includes our entry file and any files that app js imports
 },
-devtool:'cheap-module-eval-source-map' //figures out where the original line was, makes debuggin way faster ( after transpilling process  )
+devtool:'cheap-module-eval-source-map', //figures out where the original line was, makes debuggin way faster ( after transpilling process  )
 
-}
+devServer:{
+contentBase:path.join(__dirname,'public') // absolute path to public folder where index html lives, 
+
+}}
+
 

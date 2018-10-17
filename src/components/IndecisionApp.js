@@ -4,33 +4,45 @@ import Adder from './AddOption'
 import Header from './Header'
 import Action from './action'
 import Options from './Options'
-
+import OptionModal from './OptionModal'
 
 export default class IndecisionApp extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.removeAll=this.removeAll.bind(this)
-        this.optionPicker=this.optionPicker.bind(this)
-        this.addOption=this.addOption.bind(this)
-        this.removeItem=this.removeItem.bind(this)
-        this.state={
-            options:[] // if props are not provided the default value is going to be used
-        }
+    state = {
+        options:[], // if props are not provided the default value is going to be used
+        selectedOption:undefined
+    }
+       
+    // constructor(props){
+    // //     super(props)
+    // //     this.removeAll=this.removeAll.bind(this)
+    // //     this.optionPicker=this.optionPicker.bind(this)
+    // //     this.addOption=this.addOption.bind(this)
+    // //     this.removeItem=this.removeItem.bind(this)
+    // //     this.state={
+    // //         options:[] // if props are not provided the default value is going to be used
+    // //     }
+    // // }
+    
+    closeModal = () =>{
+       
+        this.setState((prevState) => ({selectedOption:undefined}))
     }
 
-    removeAll(){
+    removeAll = () => {
         this.setState(()=>({options:[]}))
     }
-    removeItem(item){
+    removeItem = (item) =>{
     this.setState(()=>({options:this.state.options.filter((value,index) => item !== value )}))
     }
 
-    optionPicker(){
+    optionPicker = () => {
         const index = Math.floor(Math.random()*this.state.options.length)
-        alert(this.state.options[index])
+       
+        this.setState((prevState) => ({selectedOption:this.state.options[index]})) //updater object, will not wipe the other state properties
+       
     }
-    addOption(option){
+    addOption = (option) =>{
         
         if(!option){
             return 'type the correct name'
@@ -78,13 +90,19 @@ export default class IndecisionApp extends React.Component {
         <div>
         <Header subtitle={'Keep on'}/>
         <Action 
-        optionPicker={this.optionPicker}
-        isAnyOption={this.state.options.length > 0}/>
+                    optionPicker={this.optionPicker}
+                    isAnyOption={this.state.options.length > 0}/>
         <Options 
-        removeItem={this.removeItem}
-        removeAll={this.removeAll}
-        data={this.state.options}/>
-        <Adder addOption={this.addOption}/>
+                    removeItem={this.removeItem}
+                    removeAll={this.removeAll}
+                    data={this.state.options}/>
+        <Adder 
+                    addOption={this.addOption}/>
+        <OptionModal 
+                     selectedOption={this.state.selectedOption}
+                     closeModal={this.closeModal}
+                     
+        />
         </div>
     )
     }
