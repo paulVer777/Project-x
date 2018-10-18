@@ -5,5 +5,18 @@ html{
 
 body{
     font-family: Arial, Helvetica, sans-serif; // if user machine doesnt support Arial, Helvetica is goint to be uses, same for helvetica.
-    font-size: 2.5rem;
+    font-size: $m-size;
+    background-color: $darkblue;
+}
+
+button{
+    cursor: pointer;
+}
+
+button:disabled{
+    cursor: default;
+}
+
+button:focus{
+    outline: none;
 }

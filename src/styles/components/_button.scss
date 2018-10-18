@@ -1,0 +1,33 @@
+
+.big-button{
+    background: $purple;
+    border:none;
+    font-size: $l-size;
+    color: white;
+    border-bottom: .6rem solid darken($purple,10%); // darken(color we want to darken, percent of darkness) function that returns darker color
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: $xl-size;
+    padding: 2.4rem;
+}
+
+.big-button:disabled{
+    opacity: .5;
+}
+
+//regular button
+
+.button{
+    border:none;
+    background: $purple;
+    border-bottom: .3rem solid darken($purple,20%);
+    font-weight: 500;
+    padding: $s-size;
+}
+
+.button--link{
+    background: none;
+    border:none;
+    color:$offwhite;
+    padding:0;
+}

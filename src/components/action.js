@@ -4,7 +4,9 @@ const Action = (props) =>
 
    (
         <div>
-            <button disabled={!props.isAnyOption} onClick={props.optionPicker}>What should i do?</button>
+            <button className='big-button' 
+            disabled={!props.isAnyOption} onClick={props.optionPicker}>What should i do?
+            </button>
         </div>
     )
 

@@ -5,7 +5,7 @@ import Modal from 'react-modal'
 const OptionModal = (props) => (
     <Modal
     isOpen={!!props.selectedOption}
-    contentLabel='SelectedOption'
+    contentLabel='SelectedOption' // for people with disabilities
     onRequestClose={props.closeModal} // closes when user clicks on background or hit press escape button
     
     >
