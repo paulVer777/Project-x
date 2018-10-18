@@ -47,11 +47,11 @@ export default class IndecisionApp extends React.Component {
     addOption = (option) =>{
         
         if(!option){
-            return 'type the correct name'
+            return 'Type the correct name'
         }
         else if(this.state.options.indexOf(option) > -1)
         {
-            return 'this option already exists'
+            return 'This option already exists'
         }
 
         this.setState((prevState)=>({

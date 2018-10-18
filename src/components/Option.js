@@ -4,8 +4,8 @@ import React from 'react'
 const Option = (props) => 
 
      (
-        <div>
-        <span>{props.text} </span>
+        <div className='option'>
+        <p className='option__text'>{props.count}. {props.text} </p>
         <button 
         className='button button--link'
         onClick={(e) => props.removeItem(props.text)} > Remove 

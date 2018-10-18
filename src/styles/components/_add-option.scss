@@ -1,0 +1,27 @@
+
+.add-option__form{
+display: flex;
+padding:$l-size;
+justify-content: space-between;
+}
+.add-option__input{
+    flex:1;
+    background: $darkblue;
+    border: none;
+    border-bottom: .3rem solid darken($darkblue,10%);
+    margin-right: $s-size;
+    color:$offwhite;
+    padding:$s-size;
+}
+
+.add-option__input:focus{
+    outline: none;
+}
+
+.add-option__error{
+    color:$offwhite;
+    font-style: italic;
+    padding: 0 $m-size;
+    margin-top: $m-size;
+    text-align: center;
+}

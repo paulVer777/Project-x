@@ -15,7 +15,7 @@ const  Options = (props) =>
        {props.data.length === 0 && <p className='widget-message'>There is no options available</p>}
        {
         props.data.map((value,index) => <Option 
-        
+        count={index+1}
         removeItem={props.removeItem}
         key={value} text={value}/>)
         }
